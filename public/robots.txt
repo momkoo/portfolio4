@@ -1,0 +1,11 @@
+# robots.txt for WEDDING STORY
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://wedding-story.netlify.app/sitemap.xml
+
+# Disallow admin or private areas (if any)
+Disallow: /test-results/
+Disallow: /node_modules/
