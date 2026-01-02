@@ -7,6 +7,9 @@ dist/
 # Test results
 test-results/
 
+# User input files
+user_input_files/
+
 # OS files
 .DS_Store
 Thumbs.db

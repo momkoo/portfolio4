@@ -211,31 +211,48 @@ function initNavigation() {
         }
     });
 
-    // 네비게이션 링크 클릭 시 해당 색상으로 변경
+    // 네비게이션 링크 클릭 시 처리
     const navLinks = document.querySelectorAll('.nav-link');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
-            e.preventDefault();
+            const href = this.getAttribute('href');
 
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
+            // 페이지 링크 (.html)인 경우 - 기본 동작 허용 (페이지 이동)
+            if (href.includes('.html')) {
+                // 색상 변경 (선택사항)
                 const accentColor = this.dataset.color;
+                if (accentColor) {
+                    document.documentElement.style.setProperty('--current-accent', accentColor);
+                }
+                return; // 기본 동작 허용 - 페이지 이동
+            }
 
-                // 즉시 색상 변경
-                document.documentElement.style.setProperty('--current-accent', accentColor);
+            // 앵커 링크 (#)인 경우 - 스크롤
+            if (href.startsWith('#')) {
+                e.preventDefault();
 
-                // 부드럽게 스크롤
-                const headerOffset = 80;
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                if (targetSection) {
+                    const accentColor = this.dataset.color;
+
+                    // 즉시 색상 변경
+                    if (accentColor) {
+                        document.documentElement.style.setProperty('--current-accent', accentColor);
+                    }
+
+                    // 부드럽게 스크롤
+                    const headerOffset = 80;
+                    const elementPosition = targetSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });

@@ -46,6 +46,11 @@
 
 html {
     scroll-behavior: smooth;
+    background-color: #1b1a1b;
+}
+
+body {
+    background-color: #1b1a1b;
 }
 
 body {
@@ -1131,14 +1136,6 @@ img {
 .card-mood {
     font-size: 13px;
     color: var(--color-text-muted);
-}
-
-.card-location::before {
-    content: '📍 ';
-}
-
-.card-mood::before {
-    content: '✨ ';
 }
 
 .card-desc {
